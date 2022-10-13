@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { View, Text } from 'react-native';
 import List from '../../components/List';
 import MusicPreview from '../../components/MusicPreview';
 import Search from '../../components/Search';
-// import { data } from '../../constants/data';
 import API from '../../api';
 import styles from './styles';
 import { ErrorType } from '../../utils/ErrorType';
@@ -12,6 +11,7 @@ const Home = () => {
   const [tracks, setTracks] = useState([]);
   const [search, setSearch] = useState('');
   const [activeTrack, setActiveTrack] = useState({});
+  const toast = useRef(null);
 
   const getSearchedData = async (value) => {
     try {

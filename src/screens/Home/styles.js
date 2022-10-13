@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import colors from '../../constants/colors';
 
 const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -20,11 +21,16 @@ const styles = StyleSheet.create({
   emptyContainer: {
     display: 'flex',
     flex: 1,
+    minHeight: deviceHeight,
     justifyContent: 'center',
     alignItems: 'center',
   },
   emptyTextView: {
     marginTop: 25,
+  },
+  emptyScreenSearch: {
+    borderColor: colors.GREY_WHITE,
+    borderWidth: 3,
   },
   emptyText: {
     fontSize: 16,
