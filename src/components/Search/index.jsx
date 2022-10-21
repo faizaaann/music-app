@@ -3,11 +3,24 @@ import { Image, StyleSheet, TextInput, View } from 'react-native';
 import colors from '../../constants/colors';
 import images from '../../constants/images';
 
+/**
+ * Search Component
+ *
+ * @component
+ * @example
+ *
+ * return <Search onChangeText={(text) => setSearch(text)} />
+ *
+ * @returns {ReactElement}
+ * @author Faizan Ahmad <a-f.a@outlook.com>
+ * @version 1.0.0
+ */
+
 const Search = ({ onChangeText }) => {
   return (
     <View style={styles.inputContainer}>
       <Image source={images.SEARCH} style={styles.searchIcon} />
-      <TextInput style={styles.input} onChangeText={onChangeText} placeholder={'Search artist'} />
+      <TextInput style={styles.input} onChangeText={onChangeText} placeholder={'Search artist, music or album'} />
     </View>
   );
 };

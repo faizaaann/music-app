@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: colors.GREY_WHITE,
     borderWidth: 3,
-    width: (deviceWidth / 100) * 85,
+    width: (deviceWidth / 100) * 90,
   },
   emptyContainer: {
     display: 'flex',
@@ -37,12 +37,18 @@ const styles = StyleSheet.create({
   },
   emptyScreenSearch: {
     borderColor: colors.GREY_WHITE,
+    width: (deviceWidth / 100) * 30,
     borderWidth: 3,
   },
   emptyText: {
     fontSize: 16,
     fontWeight: 500,
     fontStyle: 'italic',
+  },
+  titleText: {
+    fontSize: 26,
+    fontWeight: 500,
+    marginBottom: 15,
   },
   list: {
     marginTop: 25,
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 25,
   },
   leftContinerFull: {
-    width: (deviceWidth / 100) * 90,
+    width: deviceWidth,
     padding: 25,
   },
   rightContainer: {
@@ -64,6 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: (deviceWidth / 100) * 70,
   },
+  noResultText: { color: 'red', fontWeight: 'bold', marginVertical: 10, fontSize: 16 },
 });
 
 export default styles;

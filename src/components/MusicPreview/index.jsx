@@ -7,58 +7,70 @@ import styles from './styles';
 
 import defaultImage from '../../assets/images/track-default.png';
 
-const MusicPreview = ({ tracks, activeTrack }) => {
-  const [sound, setSound] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+/**
+ * Component for the Selected Track Preview
+ *
+ * @component
+ * @example
+ *
+ * return <MusicPreview
+                tracks={tracks}
+                activeTrack={activeTrack}
+                playingSong={playingSong}
+                setPlayingSong={setPlayingSong}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                previousTrack={previousTrack}
+                setPreviousTrack={setPreviousTrack}
+              />
+ *
+ * @returns {ReactElement}
+ * @author Faizan Ahmad <a-f.a@outlook.com>
+ * @version 1.0.0
+ */
 
+const MusicPreview = ({ tracks, activeTrack, playingSong, setPlayingSong, isPlaying, setIsPlaying, previousTrack, setPreviousTrack }) => {
   const songs = tracks?.filter((track) => track?.collectionName === activeTrack?.collectionName);
   const { previewUrl } = activeTrack;
 
   const resumeSound = async () => {
-    console.log('resume');
     setIsPlaying(true);
-    await sound.playAsync();
+    await playingSong.playAsync();
   };
 
   const pauseSound = async () => {
-    console.log('pause');
     setIsPlaying(false);
-    await sound.pauseAsync();
+    await playingSong.pauseAsync();
   };
 
   const playSound = async () => {
-    console.log('play');
-    // stop();
+    await playingSong?.unloadAsync();
     try {
-      const sound = new Audio.Sound();
-
-      console.log('new load');
-      await sound.loadAsync({
+      const audio = new Audio.Sound();
+      await audio.loadAsync({
         uri: previewUrl,
       });
-
-      setSound(sound);
-      await sound.playAsync();
+      await audio.playAsync();
+      setPlayingSong(audio);
       setIsPlaying(true);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    console.log('track change');
-    // setIsPlaying(false);
-    setSound(null);
-  }, [activeTrack]);
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          // sound.unloadAsync();
-          // setSound(null);
-        }
-      : undefined;
-  }, [sound]);
+  const handlePress = () => {
+    if (!playingSong) {
+      setPreviousTrack(activeTrack);
+      playSound();
+    } else if (!isPlaying && playingSong && activeTrack.previewUrl === previousTrack.previewUrl) {
+      resumeSound();
+    } else if (playingSong && activeTrack.previewUrl !== previousTrack.previewUrl) {
+      setPreviousTrack(activeTrack);
+      playSound();
+    } else if (isPlaying && playingSong) {
+      pauseSound();
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -69,8 +81,8 @@ const MusicPreview = ({ tracks, activeTrack }) => {
           </View>
         </TouchableOpacity>
         <View style={styles.playButtonContainer}>
-          <TouchableOpacity onPress={isPlaying ? pauseSound : sound ? resumeSound : playSound}>
-            {sound && isPlaying ? <Image source={images.PAUSE} style={styles.playIcon} /> : <Image source={images.PLAY} style={styles.playIcon} />}
+          <TouchableOpacity onPress={handlePress}>
+            {playingSong && isPlaying ? <Image source={images.PAUSE} style={styles.playIcon} /> : <Image source={images.PLAY} style={styles.playIcon} />}
           </TouchableOpacity>
         </View>
       </View>

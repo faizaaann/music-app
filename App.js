@@ -1,19 +1,22 @@
 import { Suspense } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
-import { Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import Home from './src/screens/Home';
 import ErrorFallback from './src/components/ErrorFallback';
-import { NativeBaseProvider, Box } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
+import colors from './src/constants/colors';
+
 const errorHandler = (error, stackTrace) => {
-  /* Log the error to an error reporting service */
   console.log(error, stackTrace);
 };
 
+const resetErrorBoundary = () => {};
+
 export default function App() {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback} onError={errorHandler}>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={errorHandler} resetErrorBoundary={resetErrorBoundary}>
       <NativeBaseProvider>
-        <Suspense fallback={<Text>Loading ....</Text>}>
+        <Suspense fallback={<ActivityIndicator size="large" color={colors.BLACK} />}>
           <Home />
         </Suspense>
       </NativeBaseProvider>

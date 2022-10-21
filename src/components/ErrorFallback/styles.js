@@ -10,14 +10,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textContainer: {
-    width: (deviceWidth / 100) * 30,
+    width: (deviceWidth / 100) * 33,
     height: (deviceHeight / 100) * 30,
   },
   somethingWrong: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     color: 'red',
     marginVertical: 5,
+  },
+  somethingWrongMessage: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'red',
+    marginVertical: 8,
   },
 });
 

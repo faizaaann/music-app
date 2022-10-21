@@ -2,7 +2,20 @@ import { View, FlatList, SafeAreaView, Text, Image, TouchableOpacity } from 'rea
 import Divider from '../Divider';
 import styles from './styles';
 
-const List = ({ tracks, activeTrack, setActiveTrack, isMusicPlayer }) => {
+/**
+ * Component to list down the tracks
+ *
+ * @component
+ * @example
+ *
+ * return <List tracks={tracks} setActiveTrack={setActiveTrack} isPlaying={boolean} playingSong={playingSong} previousTrack={previousTrack} isMusicPlayer={boolean}/>
+ *
+ * @returns {ReactElement}
+ * @author Faizan Ahmad <a-f.a@outlook.com>
+ * @version 1.0.0
+ */
+
+const List = ({ tracks, setActiveTrack, isMusicPlayer, previousTrack }) => {
   const ListItem = ({ item }) => (
     <>
       <TouchableOpacity onPress={() => setActiveTrack(item)}>
@@ -15,7 +28,8 @@ const List = ({ tracks, activeTrack, setActiveTrack, isMusicPlayer }) => {
             <Text style={styles.artistName}>{item.artistName}</Text>
             <Text style={styles.albumName}>{item.collectionName.length > 20 ? item.collectionName.substring(0, 20 - 3) + '...' : item.collectionName}</Text>
           </View>
-          {item?.trackId === activeTrack?.trackId && <Text style={styles.playingStatus}>playing...</Text>}
+
+          {item?.trackId === previousTrack?.trackId && <Text style={styles.playingStatus}>playing...</Text>}
         </View>
       </TouchableOpacity>
       <Divider />
