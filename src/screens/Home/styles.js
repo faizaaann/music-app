@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     maxWidth: (deviceWidth / 100) * 20,
   },
+  searchFull: {
+    alignSelf: 'flex-start',
+    margin: 10,
+    borderColor: colors.GREY_WHITE,
+    borderWidth: 3,
+    width: (deviceWidth / 100) * 85,
+  },
   emptyContainer: {
     display: 'flex',
     flex: 1,
@@ -43,6 +50,10 @@ const styles = StyleSheet.create({
   },
   leftContiner: {
     maxWidth: (deviceWidth / 100) * 30,
+    padding: 25,
+  },
+  leftContinerFull: {
+    width: (deviceWidth / 100) * 90,
     padding: 25,
   },
   rightContainer: {

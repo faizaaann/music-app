@@ -11,7 +11,7 @@ const ErrorFallback = ({ error, componentStack, resetErrorBoundary }) => {
         <Text style={styles.somethingWrong}>Something Went Wrong</Text>
         <Text>{error?.message}</Text>
         <Text>{componentStack}</Text>
-        <Button onPress={resetErrorBoundary} title="Try Again" color={'#6C63FF'} />
+        <Button onPress={resetErrorBoundary} title="Try Again" />
       </View>
     </View>
   );
